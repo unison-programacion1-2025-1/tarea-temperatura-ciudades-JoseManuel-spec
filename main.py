@@ -21,6 +21,15 @@ def main():
     if 'Phoenix' in df_celsius.columns:
         phoenix = df_celsius['Phoenix']
 
+        # Primero: promedio durante 2016
+        phoenix_2016 = phoenix[phoenix.index.year == 2016]
+        if not phoenix_2016.empty:
+            temp_prom_2016 = phoenix_2016.mean()
+            print(f"La temperatura promedio durante 2016 en Phoenix fue de: {temp_prom_2016:.2f} °C")
+        else:
+            print("No hay datos de Phoenix para el año 2016 en el DataFrame.")
+
+        # Luego: mínimos y máximos
         fecha_min = phoenix.idxmin()
         temp_min = phoenix.min()
         if pd.notnull(fecha_min):
@@ -36,13 +45,6 @@ def main():
         else:
             print("No se pudo determinar la fecha de la temperatura máxima en Phoenix.")
         print(f"La temperatura máxima registrada en Phoenix fue de: {temp_max:.2f} °C")
-
-        phoenix_2016 = phoenix[phoenix.index.year == 2016]
-        if not phoenix_2016.empty:
-            temp_prom_2016 = phoenix_2016.mean()
-            print(f"La temperatura promedio durante 2016 en Phoenix fue de: {temp_prom_2016:.2f} °C")
-        else:
-            print("No hay datos de Phoenix para el año 2016 en el DataFrame.")
     else:
         print("La columna 'Phoenix' no existe en el DataFrame.")
 
