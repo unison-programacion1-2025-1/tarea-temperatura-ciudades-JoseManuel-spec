@@ -25,7 +25,7 @@ def main():
         phoenix_2016 = phoenix[phoenix.index.year == 2016]
         if not phoenix_2016.empty:
             temp_prom_2016 = phoenix_2016.mean()
-            print(f"La temperatura promedio durante 2016 en Phoenix fue de: {temp_prom_2016:.2f} °C")
+            print(f"La temperatura promedio durante 2016 en Phoenix fue de: {temp_prom_2016:.1f} °C")
         else:
             print("No hay datos de Phoenix para el año 2016 en el DataFrame.")
 
@@ -36,7 +36,7 @@ def main():
             print(f"El día con la temperatura mínima en Phoenix fue: {fecha_min.strftime('%Y-%m-%d %H:%M:%S')}")
         else:
             print("No se pudo determinar la fecha de la temperatura mínima en Phoenix.")
-        print(f"La temperatura mínima registrada en Phoenix fue de: {temp_min:.2f} °C")
+        print(f"La temperatura mínima registrada en Phoenix fue de: {temp_min:.1f} °C")
 
         fecha_max = phoenix.idxmax()
         temp_max = phoenix.max()
@@ -44,7 +44,7 @@ def main():
             print(f"El día con la temperatura máxima en Phoenix fue: {fecha_max.strftime('%Y-%m-%d %H:%M:%S')}")
         else:
             print("No se pudo determinar la fecha de la temperatura máxima en Phoenix.")
-        print(f"La temperatura máxima registrada en Phoenix fue de: {temp_max:.2f} °C")
+        print(f"La temperatura máxima registrada en Phoenix fue de: {temp_max:.1f} °C")
     else:
         print("La columna 'Phoenix' no existe en el DataFrame.")
 
@@ -53,13 +53,13 @@ def main():
     if 'Phoenix' in df_celsius.columns:
         phoenix_2016 = df_celsius[df_celsius.index.year == 2016]
         if not phoenix_2016.empty:
-            plt.scatter(phoenix_2016.index, phoenix_2016['Phoenix'].round(2), label='Phoenix')
+            plt.scatter(phoenix_2016.index, phoenix_2016['Phoenix'].round(1), label='Phoenix')
         else:
-            plt.scatter(df_celsius.index, df_celsius['Phoenix'].round(2), label='Phoenix')
+            plt.scatter(df_celsius.index, df_celsius['Phoenix'].round(1), label='Phoenix')
     else:
         numeric_cols = df_celsius.select_dtypes(include=['number']).columns
         if len(numeric_cols) > 0:
-            plt.scatter(df_celsius.index, df_celsius[numeric_cols[0]].round(2), label=numeric_cols[0])
+            plt.scatter(df_celsius.index, df_celsius[numeric_cols[0]].round(1), label=numeric_cols[0])
             plt.title(f'Temperatura de {numeric_cols[0]}')
         else:
             plt.title('No hay columnas numéricas para graficar')
